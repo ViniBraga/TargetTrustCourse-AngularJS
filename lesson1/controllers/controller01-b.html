@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body ng-controller="UserController">
+    <p>{{greet}}</p>
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('UserController', ['$scope', function($scope) {
+                $scope.greet = 'Hello World!';
+            }]);
+    </script>
+</body>
+</html>

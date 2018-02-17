@@ -1,0 +1,105 @@
+<!-- info in array -->
+<!-- (key,value) in array -->
+
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body ng-controller="UserController as uc">
+    <h1>{{uc.title}}</h1>
+    
+    <ul>
+        <li ng-repeat="user in uc.users">
+            {{user.name}} - {{user.mail}}
+        </li>
+    </ul>
+
+
+    <input type="text" ng-model="searchField" placeholder="Busca...">
+    <table border="1">
+        <thead>
+            <tr>
+                <th ng-repeat="(key, value) in uc.users[0]">
+                    {{key}}
+                </th>
+            </tr>
+        </thead>
+        <tbody ng-init="propKey = 'name';reverse = true">
+            <tr ng-repeat="user in uc.users | filter:searchField | orderBy:propKey ">
+                <td ng-repeat="info in user">
+                    {{info}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<!-- 
+    <div ng-controller="TecnologyController as tc">
+        <h1>{{tc.title}}</h1>
+        <ul>
+            <li ng-repeat="tec in tc.tecnologies">
+                {{tec.name}}
+            </li>
+        </ul>
+    </div> -->
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('UserController', UserController)
+            .controller('TecnologyController', TecnologyController)
+            .filter('capitalize', CapitalizeFilter);
+
+            UserController.$inject = ['$filter'];
+
+            function UserController($filter) {
+                let vm = this;
+
+                debugger;
+                
+                vm.title = 'Usuários';
+                vm.users = [
+                    {
+                        name: 'Roberto Zaffari', 
+                        phone: '985456875', 
+                        mail: 'robertozaffari@gmail.com'
+                    },
+                    {
+                        name: 'Lucas da Silva', 
+                        phone: '845333789', 
+                        mail: 'lsilva@gmail.com'
+                    },
+                    {
+                        name: 'Matheus Oliveira', 
+                        phone: '123555548', 
+                        mail: 'moliveira@hotmail.com'
+                    },
+                ];
+            }
+
+            //TecnologyController.$inject = ['$scope'];
+
+            function TecnologyController() {
+                let vm = this;
+
+                vm.title = 'Tecnologias';
+                vm.tecnologies = [
+                    {name: 'AngularJS', link: 'http://www.angularjs.org'},
+                    {name: '.net', link: ''},
+                    {name: 'Java', link: ''},
+                    {name: 'Node', link: ''},
+                    {name: 'SQL', link: ''},
+                ];
+            }
+
+            function CapitalizeFilter() {
+                return function (value) {
+                    if (value) {
+                        return value[0].toUpperCase() + value.substring(1);
+                    }
+                }
+            } 
+    </script>
+</body>
+</html>

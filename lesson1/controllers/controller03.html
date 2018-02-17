@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body ng-controller="UserController as uc">
+    <h1>{{uc.title}}</h1>
+
+    <ul>
+        <li ng-repeat="user in uc.users">
+            {{user.name}} - {{user.mail}}
+        </li>
+    </ul>
+
+    <div ng-controller="TechController as tc">
+        <h3>{{tc.title}}</h3>
+        <h1>{{titleNoScope}}</h1>
+        <ul>
+            <li ng-repeat="tech in tc.techs">
+                {{tech.name}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('UserController', UserController)
+            .controller('TechController', TechController);
+
+            //UserController.$inject = ['$scope'];
+
+            function UserController() {
+                this.title = 'Usuários';
+                this.users = [
+                    {name: 'Roberto Zaffari', phone: '985.456.875', mail: 'robertozaffari@gmail.com'},
+                    {name: 'Rodrigo da Silva', phone: '845.333.789', mail: 'rodrigosilva@gmail.com'},
+                    {name: 'Matheus Oliveira', phone: '123.555.548', mail: 'moliveira@hotmail.com'},
+                ];
+            }
+
+            TechController.$inject = ['$scope'];
+
+            function TechController($scope) {
+                $scope.titleNoScope = 'Novo titulo';
+                this.title = 'Tecnologias';
+                this.techs = [
+                    {name: 'AngularJS', link: 'http://www.angularjs.org'},
+                    {name: '.net', link: ''},
+                    {name: 'Java', link: ''},
+                    {name: 'Node', link: ''},
+                    {name: 'SQL', link: ''},
+                ];
+            }
+    </script>
+</body>
+</html>

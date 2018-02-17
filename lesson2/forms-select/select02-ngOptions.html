@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+    <link rel="stylesheet" href="https://yui-s.yahooapis.com/pure/0.6.0/pure-min.css">
+    <style>
+        section {
+            margin: 0 auto;
+            width: 800px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <section ng-controller="UserController as uc">
+        <h1>{{uc.title}}</h1>
+        <hr>
+
+        <div class="pure-form pure-form-aligned">
+            <div class="pure-control-group">
+                <label for="ngrepeat">ng-Repeat</label>
+                <select name="ngrepeat" ng-model="uc.option_repeat">
+                    <option value="{{user.mail}}" ng-repeat="user in uc.users">
+                        {{user.name}}
+                    </option>
+                </select>
+                <br>
+                >> {{uc.option_repeat}} <<
+            </div>
+            <div class="pure-control-group">
+                <label for="ngopt01">ng-Options básico</label>
+                <select name="ngopt01" ng-model="uc.option_basic" ng-options="user.name for user in uc.users">
+                    <option value=""></option>
+                </select>
+                <br>
+                >> {{uc.option_basic}} <<
+            </div>
+            <div class="pure-control-group">
+                <label for="ngopt02">ng-Options Select as</label>
+                <select name="ngopt02" ng-model="uc.option_selectas" ng-options="user.mail as user.name for user in uc.users">
+                    <option value=""></option>
+                </select>
+                <br>
+                >> {{uc.option_selectas}} <<
+            </div>
+            <div class="pure-control-group">
+                <label for="ngopt03">ng-Options populado</label>
+                <select name="ngopt03" ng-model="uc.option_pre_selected" ng-options="user.mail as user.name for user in uc.users">
+                    <option value=""></option>
+                </select>
+                <br>
+                >> {{uc.option_pre_selected}} <<
+            </div>
+            <div class="pure-control-group">
+                <label for="ngopt04">ng-Options agrupado</label>
+                <select name="ngopt04" ng-model="uc.option_grouped" ng-options="user.mail as user.name group by user.area for user in uc.users">
+                    <option value=""></option>
+                </select>
+                <br>
+                >> {{uc.option_grouped}} <<
+            </div>
+            <div class="pure-control-group">
+                <label for="ngopt05">ng-Options disabled</label>
+                <select name="ngopt05" ng-model="uc.option_grouped_with_disabled" ng-options="user.mail as user.name group by user.area disable when !user.active for user in uc.users">
+                    <option value=""></option>
+                </select>
+                <br>
+                >> {{uc.option_grouped_with_disabled}} <<
+            </div>
+        </div>
+    </section>
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('UserController', UserController);
+
+            function UserController() {
+                let vm = this;
+
+                vm.title = 'Exemplo de uso do Select';
+
+                vm.users = [
+                    {   
+                        name: 'Roberto Zaffari', 
+                        area: 'desenvolvimento', 
+                        phone: '985456875', 
+                        mail: 'robertozaffari@gmail.com', 
+                        active: true
+                    }, {   
+                        name: 'Aline', 
+                        area: 'gerencia', 
+                        phone: '985456875', 
+                        mail: 'aline@gmail.com', 
+                        active: true
+                    }, {   
+                        name: 'Gabriel', 
+                        area: 'desenvolvimento', 
+                        phone: '985456875', 
+                        mail: 'gabe@gmail.com', 
+                        active: true
+                    }, {   
+                        name: 'Felipe', 
+                        area: 'gerencia', 
+                        phone: '985456875', 
+                        mail: 'felipao@gmail.com', 
+                        active: false
+                    }, {   
+                        name: 'Rodrigo da Silva', 
+                        area: 'rh', 
+                        phone: '845333789', 
+                        mail: 'rodrigosilva@gmail.com', 
+                        active: true
+                    }, {   
+                        name: 'Matheus Oliveira', 
+                        area: 'marketing', 
+                        phone: '123555548', 
+                        mail: 'moliveira@hotmail.com', 
+                        active: false
+                    }
+                ];
+
+                vm.option_pre_selected = vm.users[3].mail;
+
+            }
+    </script>
+</body>
+</html>

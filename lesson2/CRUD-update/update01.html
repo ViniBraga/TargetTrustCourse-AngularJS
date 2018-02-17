@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body ng-controller="ExemploController as ec">
+    <h1>{{ec.title}}</h1>
+
+    <ul>
+        <li ng-repeat="user in ec.users">
+            {{user.name + ' - ' + user.mail}}
+            <button type="button" ng-click="">EDIT</button>
+        </li>
+    </ul>
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('ExemploController', ExemploController);
+
+            function ExemploController() {
+                let vm = this;
+
+                vm.title = 'Exemplo de uso do EDIT/UPDATE';
+                vm.users = [
+                    {name: 'Roberto Zaffari', mail: 'rz@gmail.com' },
+                    {name: 'Fernando da Silva', mail: 'fernando.silva@hotmail.com' },
+                    {name: 'Matheus Oliveira', mail: 'matheus@bol.com' }
+                ];
+
+            }
+    </script>
+</body>
+</html>

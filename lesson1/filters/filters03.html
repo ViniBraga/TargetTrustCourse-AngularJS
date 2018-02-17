@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body>
+    <input type="text" ng-model="model" />
+
+    <p>
+        <!-- uppercase/lowercase/currency/date -->
+        O que está no meu modelo é: <b>{{model | reverse}}</b>
+    </p>
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .filter('reverse', function () {
+                return function(value) {
+                    if (value) {
+                        return value.split('').reverse().join('');
+                    }
+                }
+            })
+            //captalize
+            .filter('capitalize', function () {
+                return function (value) {
+                    if (value) {
+                        return value[0].toUpperCase() + value.substring(1);
+                    }
+                }
+            })
+            //capitalize every word
+            .filter('capitalize', function () {
+                function wordCaptalizingFn(word) {
+                    if (word.length > 1) {
+                        return word[0].toUpperCase() + word.substring(1);
+                    } else {
+                        return word;
+                    }
+                }
+
+                return function (value) {
+                    if (value) {
+                        return value.split(' ')
+                            .map(wordCaptalizingFn)
+                            .join(' ');
+                    }
+                }
+            })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+    <link rel="stylesheet" href="https://yui-s.yahooapis.com/pure/0.6.0/pure-min.css">
+    <style>
+        section {
+            margin: 0 auto;
+            width: 800px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <section ng-controller="UserController as uc">
+        <h1>{{uc.title}}</h1>
+        <hr>
+
+        <div class="pure-form">
+            <label>Select usando ng-repeat</label>
+            <select ng-model="uc.selectedOption">
+                <option value="{{user.mail}}" ng-repeat="user in uc.usersForSelect">{{user.name}}</option>
+            </select>
+            <br>
+            <h3>{{uc.selectedOption}}</h3>
+        </div>
+    </section>
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('UserController', UserController);
+
+            function UserController() {
+                let vm = this;
+
+                vm.title = 'Exemplo de uso do Select';
+
+                vm.usersForSelect = [
+                    {name: 'Roberto Zaffari', area: 'desenvolvimento', phone: '985456875', mail: 'robertozaffari@gmail.com'},
+                    {name: 'Aline', area: 'gerencia', phone: '985456875', mail: 'aline@hotmail.com'},
+                    {name: 'Gabriel', area: 'desenvolvimento', phone: '985456875', mail: 'gabe@bol.com'},
+                    {name: 'Felipe', area: 'gerencia', phone: '985456875', mail: 'felipao@gmail.com'},
+                    {name: 'Rodrigo da Silva', area: 'rh', phone: '845333789', mail: 'rodrigosilva@gmail.com'},
+                    {name: 'Matheus Oliveira', area: 'marketing', phone: '123555548', mail: 'moliveira@hotmail.com'},
+                ];
+
+            }
+    </script>
+</body>
+</html>

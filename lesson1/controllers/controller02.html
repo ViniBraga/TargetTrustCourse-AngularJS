@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body ng-controller="AgendaController">
+    <header>
+        <h1>{{title}}</h1>
+    </header>
+
+    <ul>
+        <li ng-repeat="user in contacts">
+            {{user.name}} - {{user.mail}}
+        </li>
+    </ul>
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('AgendaController', AgendaController);
+
+            AgendaController.$inject = ['$scope'];
+
+            function AgendaController($scope) {
+                $scope.title = 'Minha Agenda';
+                $scope.contacts = [
+                    {name: 'Roberto Zaffari', phone: '985.456.875', mail: 'robertozaffari@gmail.com'},
+                    {name: 'Rodrigo da Silva', phone: '845.333.789', mail: 'rodrigosilva@gmail.com'},
+                    {name: 'Matheus Oliveira', phone: '123.555.548', mail: 'moliveira@hotmail.com'},
+                ];
+            }
+    </script>
+</body>
+</html>

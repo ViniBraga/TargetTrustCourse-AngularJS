@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body ng-controller="UserController as uc">
+    <h1>{{uc.title}}</h1>
+
+    <ul>
+        <li ng-repeat="user in uc.users">
+            {{user.name + ' ' + user.mail}}
+        </li>
+    </ul>
+
+    <section>
+        <label>Name:</label>
+        <input type="text" ng-model="uc.user.name">
+        <br>
+        <label>Mail:</label>
+        <input type="text" ng-model="uc.user.mail">
+        <br>
+        {{uc.user}}
+        <button type="button" ng-click="uc.add(uc.user)">ADD USER</button>
+    </section>
+    
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .controller('UserController', UserController);
+
+            function UserController() {
+                let vm = this;
+
+                vm.title = 'Usuários';
+                vm.users = [
+                    {name: 'Roberto Zaffari', mail: 'rz@gmail.com' },
+                    {name: 'Fernando da Silva', mail: 'fernando.silva@hotmail.com' },
+                    {name: 'Matheus Oliveira', mail: 'matheus@bol.com' },
+                    /////////
+                ];
+
+                vm.add = addUser;
+                function addUser(user) {
+                    vm.users.push(angular.copy(user));
+                    delete vm.user;
+                }
+            }
+    </script>
+</body>
+</html>

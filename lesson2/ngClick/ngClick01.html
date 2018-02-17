@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AngularTT">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular TT</title>
+</head>
+<body>
+
+	<section ng-controller="ExemploController as ec">
+		<h1>{{ec.title}}</h1>
+
+		<ul>
+			<li ng-repeat="item in ec.items">
+				{{item.name}} - {{item.description}}
+			</li>
+		</ul>
+
+		<br>
+		<p>
+			<input type="text" placeholder="Name" ng-model="ec.form.name"><br>
+			<input type="text" placeholder="Description" ng-model="ec.form.description">
+			<br>
+
+			{{ec.form}}
+
+		</p>
+		<button ng-click="ec.add(ec.form)">ADD</button>
+	</section>
+
+
+
+
+	<script src="../angular.min.js"></script>
+    <script>
+    	angular.module('AngularTT', [])
+    		.controller('ExemploController', ExemploController);
+
+
+    	function ExemploController() {
+    		let vm = this;
+
+
+    		vm.title = 'Exemplo de ngClick';
+
+    		vm.existentModel = "pre defined value";
+
+    		vm.items = [
+    			{
+    				name: 'Item 1',
+    				description: 'item1 description'
+    			}, {
+    				name: 'Item 2',
+    				description: 'item2 description'
+    			}, {
+    				name: 'Item 4',
+    				description: 'item3 description'
+    			}, {
+    				name: 'Item 4',
+    				description: 'item4 description'
+    			},
+    		];
+
+    		vm.add = add;
+
+    		function add(item) {
+    			vm.items.push(angular.copy(item));
+    			delete vm.form;
+    		}
+
+
+    	}
+    </script>
+</body>
+</html>

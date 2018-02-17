@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body>
+    <input type="text" ng-model="model" />
+
+    <p>
+        <!-- uppercase/lowercase/currency/date -->
+        O que está no meu modelo é: <b>{{model | reverse}}</b>
+    </p>
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .filter('reverse', function () {
+                return function(value) {
+                    if (value) {
+                        return value.split('').reverse().join('');
+                    }
+                }
+            });
+    </script>
+</body>
+</html>

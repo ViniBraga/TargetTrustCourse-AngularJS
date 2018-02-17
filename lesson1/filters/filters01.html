@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="angularTT">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS TT</title>
+</head>
+<body>
+    <input type="text" ng-model="model" />
+
+    <p>
+        <!-- uppercase/lowercase -->
+        O que está no meu modelo é:
+        <strong>{{model | invert | uppercase}}</strong>
+        <br>
+        O que está no meu modelo truncado é:
+        <strong>{{model | truncate:20:' e algo mais...'}}</strong>
+        <br>
+        O que está no meu modelo truncado é:
+        <strong>{{model | truncate}}</strong>
+    </p>
+
+    <script src="../angular.min.js"></script>
+    <script>
+        angular.module('angularTT', [])
+            .filter('invert', function() {
+                return function(text) {
+                    if (text) {
+                        return text.split('').reverse().join('');
+                    }
+                }
+            })
+            .filter('truncate', function() {
+                return function(text, len, endOfString) {
+                    if (text) {
+                        var length = len || 10;
+                        var etc = endOfString || '...';
+                        if (text.length > length) {
+                            return text.substring(0, length) + etc;
+                        } else {
+                            return text;
+                        }
+                    }
+                }
+            })
+
+    </script>
+</body>
+</html>
